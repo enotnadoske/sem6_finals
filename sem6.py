@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
+from tkinter import scrolledtext as st
 import subprocess
 
 def insertText():
@@ -35,8 +36,8 @@ def onlyExtractText():
 
 file_name = "" 
 root = Tk()
-text = Text(width = 100, height = 50)
-text.grid(columnspan = 3)
+text = st.ScrolledText(width = 100, height = 50)
+text.grid(columnspan = 3, row = 0)
 b1 = Button(text = "open", command = insertText)
 b1.grid(row = 1, sticky = E)
 b2 = Button(text = "save as", command = extractText)
