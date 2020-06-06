@@ -3,7 +3,9 @@ from tkinter import filedialog as fd
 import subprocess
  
 def insertText():
-    pass
+    file_name = fd.askopenfilename()
+    result = subprocess.run(["xxd", "-g1", file_name], stdout=subprocess.PIPE)
+    text.insert(1.0    , result.stdout)
  
 def extractText():
     pass
