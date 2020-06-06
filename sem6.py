@@ -10,8 +10,11 @@ def insertText():
         file_name = fd.askopenfilename()
         l1.configure(text = str(file_name))
         text.delete(1.0, END)
-        result = subprocess.run(["xxd", "-g1", file_name], stdout=subprocess.PIPE)
+        result = subprocess.run(["xxd", "-g1", file_name], stdout=subprocess.PIPE, stderr = subprocess.PIPE)
+        if(len(result.stderr) != 0):
+            raise NameError("Error")
         text.insert(1.0, result.stdout)
+
     except:
         mb.showerror("Error", "Something went wrong with file opening")  
  
@@ -21,7 +24,9 @@ def extractText():
         s = text.get(1.0, END)
         text.delete(1.0, END)
         l1.configure(text = "File:")        
-        result = subprocess.run(["xxd", "-r","-", file_name], input = s.encode())  
+        result = subprocess.run(["xxd", "-r","-", file_name], input = s.encode(), stderr = subprocess.PIPE)  
+        if(len(result.stderr) != 0):
+            raise NameError("Error")
     except:
         mb.showerror("Error", "Something went wrong with saving")              
 
@@ -30,8 +35,10 @@ def onlyExtractText():
         global file_name
         s = text.get(1.0, END)
         l1.configure(text = "File:")
-        result = subprocess.run(["xxd", "-r","-", file_name], input = s.encode())  
+        result = subprocess.run(["xxd", "-r","-", file_name], input = s.encode(), stderr = subprocess.PIPE)  
         text.delete(1.0, END)
+        if(len(result.stderr) != 0):
+            raise NameError("Error")
     except:
         mb.showerror("Error", "Something went wrong with saving")  
     
