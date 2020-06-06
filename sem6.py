@@ -19,6 +19,8 @@ def extractText():
     try:
         file_name = fd.asksaveasfilename()
         s = text.get(1.0, END)
+        text.delete(1.0, END)
+        l1.configure(text = "File:")        
         result = subprocess.run(["xxd", "-r","-", file_name], input = s.encode())  
     except:
         mb.showerror("Error", "Something went wrong with saving")              
